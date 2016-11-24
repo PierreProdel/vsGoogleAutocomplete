@@ -202,6 +202,15 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				});
 			});
 
+            element.on('focus', function(event) {
+                scope.$apply(function() {
+                    scope.vsPlace = '';
+                    autocompleteCtrl.updatePlaceComponents();
+                    modelCtrl.$setViewValue(viewValue);
+                    modelCtrl.$render();
+                });
+            });
+
 			// prevent submitting form on enter
 			google.maps.event.addDomListener(element[0], 'keydown', function(e) {
 				if (e.keyCode == 13) {

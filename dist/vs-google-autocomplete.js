@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2015-11-29
+ * vsGoogleAutocomplete - v0.5.0 - 2016-11-24
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2015 K.Polishchuk
+ * Copyright (c) 2016 K.Polishchuk
  * License: MIT
  */
 (function (window, document) {
@@ -209,6 +209,15 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 					});
 				});
 			});
+
+            element.on('focus', function(event) {
+                scope.$apply(function() {
+                    scope.vsPlace = '';
+                    autocompleteCtrl.updatePlaceComponents();
+                    modelCtrl.$setViewValue(viewValue);
+                    modelCtrl.$render();
+                });
+            });
 
 			// prevent submitting form on enter
 			google.maps.event.addDomListener(element[0], 'keydown', function(e) {
